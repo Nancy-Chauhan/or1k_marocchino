@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("Docker pull") {
             steps {
-                sh 'docker build -t librecores/librecores-ci-openrisc.'
+                sh 'docker build -t librecores/librecores-ci-openrisc .'
                // sh 'docker pull librecores/librecores-ci-openrisc'
                 sh 'docker images'
             }
