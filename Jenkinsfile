@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage("Docker pull") {
             steps {
-                sh 'docker pull librecores/librecores-ci:0.2.0'
+                sh 'docker build -t librecores/librecores-ci-openrisc'
+               // sh 'docker pull librecores/librecores-ci-openrisc'
                 sh 'docker images'
             }
         }
@@ -35,5 +36,5 @@ pipeline {
 }
 
 void dockerrun() {
-    sh 'docker run --rm -v $(pwd):/src -e "JOB=$JOB" -e "SIM=$SIM" -e "EXPECTED_FAILURES=$EXPECTED_FAILURES" librecores/librecores-ci:0.2.0 /src/.travis/test.sh'
+    sh 'docker run --rm -v $(pwd):/src -e "JOB=$JOB" -e "SIM=$SIM" -e "EXPECTED_FAILURES=$EXPECTED_FAILURES" librecores/librecores-ci-openrisc /src/.travis/test.sh'
 }
