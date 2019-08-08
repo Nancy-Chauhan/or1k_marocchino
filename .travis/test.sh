@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-export HOME=/tmp
+#export HOME=/tmp
 
 # Setup fusesoc and add the cores required by or1k-tests
 fusesoc init -y
