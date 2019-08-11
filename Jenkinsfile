@@ -1,5 +1,5 @@
 @Library('librecores-pipeline-lib') import org.openrisc.ci.pipeline
-def pipeline = new pipeline(steps)
+def pipeline = new pipeline()
 
 node('librecores-ci-modules') {
   pipeline.dockerpull
