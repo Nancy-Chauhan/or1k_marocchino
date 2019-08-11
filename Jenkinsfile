@@ -9,4 +9,5 @@ node('librecores-ci-modules') {
         pipeline.dockerrun( "verilator" ,'verilator' )
         pipeline.dockerrun( "testing" , 'or1k-tests' , 'icarus', "or1k-cy or1k-ov or1k-shortjump")
     }
+  }
 }
