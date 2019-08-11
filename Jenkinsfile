@@ -2,6 +2,6 @@
 def pipeline = new pipeline()
 
 node{
-  echo "hello"
+  pipeline.hello(nancy)
 }
 
