@@ -2,11 +2,11 @@
 def pipeline = new pipeline()
 
 node{
-  stages { 
+  
     stage ("Docker pull"){
-      steps {
-  pipeline.dockerpull
-      }
+     
+  pipeline.dockerpull()
+
     }
   stage('docker run') {
     parallel {
@@ -15,4 +15,4 @@ node{
     }
   }
 }
-}
+
