@@ -2,12 +2,8 @@
 def pipeline = new pipeline()
 
 node{
-  
-    stage ("Docker pull"){
-     
   pipeline.dockerpull()
 
-    }
   stage('docker run') {
     parallel {
         pipeline.dockerrun( "verilator" ,'verilator' )
