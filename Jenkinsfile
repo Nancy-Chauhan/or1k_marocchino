@@ -1,8 +1,7 @@
 @Library('librecores-pipeline-lib') import org.openrisc.ci.pipeline
 def pipeline = new pipeline()
 
-pipeline {
-  agent any 
+node{
   stages { 
     stage ("Docker pull"){
       steps {
