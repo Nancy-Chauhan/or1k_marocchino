@@ -1,4 +1,4 @@
-@Library('librecores-pipeline-library') import org.openrisc.ci.pipeline
+@Library('librecores-pipeline-lib') import org.openrisc.ci.pipeline
 def pipeline = new pipeline(steps)
 
 node('librecores-ci-modules') {
