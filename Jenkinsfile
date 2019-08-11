@@ -1,39 +1,12 @@
-pipeline {
-    agent any
+@Library('librecoresci') import org.openrisc.ci.pipeline
+def pipeline = new pipeline(steps)
 
-    stages {
-        stage("Docker pull") {
-            steps {
-                sh 'docker pull librecores/librecores-ci:0.2.0'
-                sh 'docker images'
-            }
-        }
+node('librecores-ci-modules') {
+  pipeline.dockerpull
 
-        stage("Docker run") {
-            parallel {
-                stage("verilator") {
-                    environment {
-                        JOB = 'verilator'
-                    }
-                    steps {
-                        dockerrun()
-                    }
-                }
-                stage("testing") {
-                    environment {
-                        JOB = 'or1k-tests'
-                        SIM = 'icarus'
-                        EXPECTED_FAILURES = "or1k-cy or1k-ov or1k-shortjump"
-                    }
-                    steps {
-                        dockerrun()
-                    }
-                }
-            }
-        }
+  stage('docker run') {
+    parallel {
+        pipeline.dockerrun( "verilator" ,'verilator' )
+        pipeline.dockerrun( "testing" , 'or1k-tests' , 'icarus', "or1k-cy or1k-ov or1k-shortjump")
     }
-}
-
-void dockerrun() {
-    sh 'docker run --rm -v $(pwd):/src -e "JOB=$JOB" -e "SIM=$SIM" -e "EXPECTED_FAILURES=$EXPECTED_FAILURES" librecores/librecores-ci:0.2.0 /src/.travis/test.sh'
 }
