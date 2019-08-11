@@ -1,13 +1,19 @@
 @Library('librecores-pipeline-lib') import org.openrisc.ci.pipeline
 def pipeline = new pipeline()
 
-node {
+pipeline {
+  agent any 
+  stages { 
+    stage ("Docker pull"){
+      steps {
   pipeline.dockerpull
-
+      }
+    }
   stage('docker run') {
     parallel {
         pipeline.dockerrun( "verilator" ,'verilator' )
         pipeline.dockerrun( "testing" , 'or1k-tests' , 'icarus', "or1k-cy or1k-ov or1k-shortjump")
     }
   }
+}
 }
